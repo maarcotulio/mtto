@@ -1,0 +1,24 @@
+# Hugo build output
+public/
+resources/
+.hugo_build.lock
+
+# Node (tema Blowfish usa npm/Tailwind)
+node_modules/
+
+# Editores / SO
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+
+# Ambiente / segredos
+.env
+.env.*
+
+# Logs
+*.log
+
+# Ai-jail
+.ai-jail
+
+WRITER.md

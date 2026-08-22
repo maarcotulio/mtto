@@ -1,0 +1,20 @@
+disabled = false
+locale = "pt-BR"
+label = "Português"
+weight = 1
+title = "M.T.T.O"
+
+[params]
+  displayName = "PT"
+  isoCode = "pt-br"
+  rtl = false
+  dateFormat = "2 Jan 2006"
+  description = "Análises de tecnologia e mercado."
+
+[params.author]
+  name = "M.T.T.O"
+  headline = "Análises de tecnologia e mercado, sem filtro"
+  bio = "Escrevo sobre o que realmente importa no mundo da tecnologia — sem forçar uma conclusão só porque o texto precisa de um final."
+  links = [
+    { rss = "index.xml" },
+  ]

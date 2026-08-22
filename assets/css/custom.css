@@ -1,0 +1,21 @@
+/* Make links inside article content stand out in the monochrome scheme */
+.article-content a {
+  color: rgb(var(--color-neutral-900));
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-color: rgba(var(--color-neutral-400), 0.7);
+  text-underline-offset: 3px;
+}
+
+.article-content a:hover {
+  text-decoration-color: rgb(var(--color-neutral-900));
+}
+
+.dark .article-content a {
+  color: rgb(var(--color-neutral-50));
+  text-decoration-color: rgba(var(--color-neutral-600), 0.9);
+}
+
+.dark .article-content a:hover {
+  text-decoration-color: rgb(var(--color-neutral-50));
+}
