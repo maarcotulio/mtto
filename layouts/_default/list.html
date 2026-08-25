@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ with site.Params.isoCode | default (site.Language.Locale | default `en`) }}{{- . -}}{{ end }}" data-mode="{{ site.Params.defaultAppearance | default "light" }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Title | plainify | emojify }} &middot; {{ site.Title | emojify }}</title>
+{{ partial "mtto/seo.html" . }}
+{{ partial "mtto/head.html" . }}
+</head>
+<body>
+<div style="position:relative;background:var(--papel);min-height:100vh;font-family:'Newsreader',Georgia,serif;color:var(--sumi);padding:0 0 7rem;">
+
+  <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:9;opacity:0.035;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.82%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27220%27 height=%27220%27 filter=%27url(%23n)%27/%3E%3C/svg%3E&quot;);"></div>
+
+  <div style="max-width:1180px;margin:0 auto;padding:0 2.5rem;">
+
+    {{ partial "mtto/header.html" . }}
+
+    <section style="padding:5.5rem 0 3rem;animation:fadeUp 500ms ease-out both;">
+      <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:700;font-size:2.6rem;color:var(--sumi);">{{ .Title | emojify }}</h1>
+    </section>
+
+    {{ $posts := .Pages.ByDate.Reverse }}
+    <main style="display:flex;flex-direction:column;gap:5.5rem;padding-bottom:3rem;">
+      {{ range $i, $post := $posts }}
+        {{ partial "mtto/post-row.html" (dict "post" $post "n" (add $i 1)) }}
+      {{ else }}
+        <p style="font-size:19px;color:var(--tinta-md);">{{ i18n "list.no_articles" }}</p>
+      {{ end }}
+    </main>
+
+    {{ partial "mtto/footer.html" . }}
+  </div>
+</div>
+
+{{ partial "mtto/mode-toggle-script.html" . }}
+</body>
+</html>

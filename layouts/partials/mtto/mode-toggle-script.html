@@ -1,0 +1,15 @@
+<script>
+(function () {
+  var btn = document.getElementById("mtto-mode-toggle");
+  if (!btn) return;
+  function label(mode) { return mode === "light" ? "Tinta" : "Papel"; }
+  function current() { return document.documentElement.getAttribute("data-mode") || "light"; }
+  btn.textContent = label(current());
+  btn.addEventListener("click", function () {
+    var next = current() === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-mode", next);
+    btn.textContent = label(next);
+    try { localStorage.setItem("mtto-mode", next); } catch (e) {}
+  });
+})();
+</script>

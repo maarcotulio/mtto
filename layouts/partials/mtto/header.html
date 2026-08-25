@@ -1,0 +1,20 @@
+<header style="padding:3.5rem 0 0;">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+    <a href="{{ "" | relLangURL }}" style="font-family:'Shippori Mincho B1',serif;font-weight:700;font-size:2.4rem;letter-spacing:0.02em;line-height:1;color:var(--sumi);">{{ site.Title }}</a>
+    <nav style="display:flex;align-items:center;flex-wrap:wrap;row-gap:0.6rem;gap:1.6rem;font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.12em;color:var(--tinta-fraca);padding-bottom:0.4rem;">
+      {{ range site.Menus.main }}
+        <a href="{{ .URL }}" style="color:var(--tinta-fraca);white-space:nowrap;">{{ .Name | default "RSS" }}</a>
+      {{ end }}
+      {{ range .Translations }}
+        <a href="{{ .Permalink }}" class="mtto-nav-btn" style="color:var(--tinta-fraca);white-space:nowrap;">{{ if eq $.Language.Lang "pt-br" }}PT / en{{ else }}pt / EN{{ end }}</a>
+      {{ end }}
+      <button type="button" id="mtto-mode-toggle" class="mtto-nav-btn mtto-mode-btn" style="white-space:nowrap;">Tinta</button>
+    </nav>
+  </div>
+
+  <svg viewBox="0 0 1200 16" preserveAspectRatio="none" aria-hidden="true" style="display:block;width:100%;height:15px;margin-top:1.5rem;">
+    <path d="M2,6.4 C130,3.2 250,9.4 400,5.8 C560,2.0 700,10.4 850,6.6 C950,4.2 1030,8.2 1096,6.2 L1120,6.8 L1096,10.2 C1030,11.8 950,9.2 850,11.2 C700,15.2 560,7.6 400,11.6 C250,15.4 130,10.6 2,10.9 Z" fill="var(--sumi)"></path>
+    <path d="M1132,7.6 L1148,7.9 L1146,9.4 L1132,9.1 Z" fill="var(--sumi)" opacity="0.75"></path>
+    <path d="M1158,8.1 L1166,8.3 L1165,9.3 L1158,9.1 Z" fill="var(--sumi)" opacity="0.45"></path>
+  </svg>
+</header>
