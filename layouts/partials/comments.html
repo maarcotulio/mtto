@@ -26,7 +26,7 @@
       };
 
       function currentTheme() {
-        return document.documentElement.getAttribute("data-mode") === "dark" ? "dark" : "light";
+        return document.documentElement.classList.contains("dark") ? "dark" : "light";
       }
 
       var container = document.getElementById("giscus-comments");
@@ -57,7 +57,7 @@
       });
       observer.observe(document.documentElement, {
         attributes: true,
-        attributeFilter: ["data-mode"],
+        attributeFilter: ["class"],
       });
     })();
   </script>
