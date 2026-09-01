@@ -29,6 +29,70 @@
     });
   </script>
 {{ end }}
+{{ if .HasShortcode "mermaid" }}
+  {{ $mermaidLib := resources.Get "lib/mermaid/mermaid.min.js" | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script defer src="{{ $mermaidLib.RelPermalink }}" integrity="{{ $mermaidLib.Data.Integrity }}" onload="window.mttoRenderMermaid && window.mttoRenderMermaid()"></script>
+  <script>
+  (function () {
+    function palette() {
+      var s = getComputedStyle(document.documentElement);
+      function v(n) { return s.getPropertyValue(n).trim(); }
+      return {
+        startOnLoad: false,
+        securityLevel: "loose",
+        theme: "base",
+        themeVariables: {
+          background: v("--papel"),
+          primaryColor: v("--papel-alto"),
+          primaryTextColor: v("--sumi"),
+          primaryBorderColor: v("--carimbo"),
+          secondaryColor: v("--papel"),
+          secondaryTextColor: v("--sumi"),
+          secondaryBorderColor: v("--ocre"),
+          tertiaryColor: v("--papel-alto"),
+          tertiaryTextColor: v("--sumi"),
+          tertiaryBorderColor: v("--linha"),
+          lineColor: v("--tinta-fraca"),
+          textColor: v("--tinta-md"),
+          mainBkg: v("--papel-alto"),
+          nodeBorder: v("--carimbo"),
+          clusterBkg: v("--papel"),
+          clusterBorder: v("--linha"),
+          titleColor: v("--sumi"),
+          edgeLabelBackground: v("--papel"),
+          fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+          fontSize: "15px"
+        }
+      };
+    }
+    var busy = false;
+    window.mttoRenderMermaid = function () {
+      if (typeof mermaid === "undefined" || busy) return;
+      var nodes = document.querySelectorAll("pre.mermaid, .mermaid");
+      if (!nodes.length) return;
+      busy = true;
+      nodes.forEach(function (n) {
+        if (n.dataset.mttoSrc) {
+          n.innerHTML = n.dataset.mttoSrc;
+        } else {
+          n.dataset.mttoSrc = n.innerHTML;
+        }
+        n.removeAttribute("data-processed");
+      });
+      mermaid.initialize(palette());
+      mermaid.run({ nodes: nodes }).finally(function () { busy = false; });
+    };
+    if (document.readyState !== "loading") window.mttoRenderMermaid();
+    else document.addEventListener("DOMContentLoaded", window.mttoRenderMermaid);
+    // re-render whenever the light/dark mode changes
+    var last = document.documentElement.getAttribute("data-mode");
+    new MutationObserver(function () {
+      var now = document.documentElement.getAttribute("data-mode");
+      if (now !== last) { last = now; setTimeout(window.mttoRenderMermaid, 0); }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
+  })();
+  </script>
+{{ end }}
 </head>
 <body>
 <div style="position:relative;background:var(--papel);min-height:100vh;font-family:'Newsreader',Georgia,serif;color:var(--sumi);padding:0 0 7rem;">
