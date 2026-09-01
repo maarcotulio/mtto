@@ -1,89 +1,90 @@
-# M.T.T.O — blog em Hugo + Blowfish
+# M.T.T.O — Hugo + Blowfish blog
 
-Site bilíngue (PT-BR e EN) montado com [Hugo](https://gohugo.io) e o tema
-[Blowfish](https://blowfish.page).
+Bilingual site (PT-BR and EN) built with [Hugo](https://gohugo.io) and the
+[Blowfish](https://blowfish.page) theme.
 
-## Requisitos
+## Requirements
 
-Você precisa do Hugo instalado (versão **extended**, 0.164.0 — a mesma usada no build da Netlify):
+You need Hugo installed (the **extended** build, 0.164.0 — the same version
+the Netlify build uses):
 
 ```
-# Linux (exemplo)
+# Linux (example)
 wget https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_linux-amd64.tar.gz
 tar -xzf hugo_extended_0.164.0_linux-amd64.tar.gz hugo
 sudo mv hugo /usr/local/bin/hugo
 ```
 
-Pra Mac: `brew install hugo`
-Pra Windows: `choco install hugo-extended` ou baixe o `.zip` em
+On Mac: `brew install hugo`
+On Windows: `choco install hugo-extended` or download the `.zip` from
 https://github.com/gohugoio/hugo/releases
 
-## Rodar localmente (com live-reload)
+## Run locally (with live reload)
 
-Na raiz do projeto:
+From the project root:
 
 ```
 hugo server
 ```
 
-Abre em `http://localhost:1313`. Qualquer alteração num arquivo `.md`
-atualiza a página sozinha.
+Opens at `http://localhost:1313`. Any change to a `.md` file reloads the
+page automatically.
 
-## Estrutura
-
-```
-config/_default/       <- todas as configurações do site e do tema
-  hugo.toml             (título, idioma padrão, tema)
-  languages.pt-br.toml  (config específica do português)
-  languages.en.toml     (config específica do inglês)
-  menus.pt-br.toml / menus.en.toml   (menu de navegação)
-  params.toml           (opções do tema: homepage, artigo, etc.)
-content/posts/          <- seus posts ficam aqui
-themes/blowfish/        <- o tema (não mexer aqui)
-```
-
-## Como escrever um post novo
-
-Cada post precisa de **dois arquivos**, um por idioma, com o mesmo nome base:
+## Structure
 
 ```
-content/posts/nome-do-post.pt-br.md
-content/posts/nome-do-post.en.md
+config/_default/       <- all site and theme configuration
+  hugo.toml             (title, default language, theme)
+  languages.pt-br.toml  (Portuguese-specific config)
+  languages.en.toml     (English-specific config)
+  menus.pt-br.toml / menus.en.toml   (navigation menu)
+  params.toml           (theme options: homepage, article, etc.)
+content/posts/          <- your posts live here
+themes/blowfish/        <- the theme (don't touch this)
 ```
 
-Cabeçalho de cada um:
+## How to write a new post
+
+Each post needs **two files**, one per language, sharing the same base name:
+
+```
+content/posts/post-name.pt-br.md
+content/posts/post-name.en.md
+```
+
+Front matter for each one:
 
 ```markdown
 ---
-title: "Título do post"
+title: "Post title"
 date: 2026-08-20
-summary: "Resumo de uma linha, aparece na listagem."
-tags: ["ia", "mercado"]
+summary: "One-line summary, shown in the post list."
+tags: ["ai", "market"]
 ---
 
-Corpo do post em markdown normal.
+Post body in plain markdown.
 ```
 
-Se por enquanto você só quiser escrever em português, pode omitir a versão
-`.en.md` — o Hugo simplesmente não vai gerar aquele post na versão em
-inglês do site, o resto funciona normalmente.
+If for now you only want to write in Portuguese, you can leave out the
+`.en.md` version. Hugo just won't generate that post on the English side of
+the site, and everything else keeps working.
 
 ## Deploy
 
-O deploy já está configurado via `netlify.toml`: basta conectar este
-repositório a um site na Netlify. O build (`hugo --gc --minify`, versão
-0.164.0) roda automaticamente a cada push, sem precisar gerar ou subir a
-pasta `public/` manualmente.
+Deployment is already set up through `netlify.toml`: just connect this
+repository to a site on Netlify. The build (`hugo --gc --minify`, version
+0.164.0) runs automatically on every push, with no need to generate or
+upload the `public/` folder by hand.
 
-## Personalizações principais
+## Main customizations
 
-| O que mudar | Onde |
+| What to change | Where |
 |---|---|
-| Nome, bio, headline do autor | `config/_default/languages.pt-br.toml` e `languages.en.toml`, seção `[params.author]` |
-| Cor do tema | `params.toml` → `colorScheme` (opções: `blowfish`, `avocado`, `fire`, `ocean`, `forest`, `princess`, `neon`, `slate`) |
-| Modo claro/escuro padrão | `params.toml` → `defaultAppearance` |
-| Layout da home | `params.toml` → `[homepage] layout` (`profile`, `page`, `hero`, `card`, `background`) |
-| Menu do topo | `menus.pt-br.toml` / `menus.en.toml` |
-| Domínio real | `config/_default/hugo.toml` → `baseURL` |
+| Author name, bio, headline | `config/_default/languages.pt-br.toml` and `languages.en.toml`, `[params.author]` section |
+| Theme color | `params.toml` → `colorScheme` (options: `blowfish`, `avocado`, `fire`, `ocean`, `forest`, `princess`, `neon`, `slate`) |
+| Default light/dark mode | `params.toml` → `defaultAppearance` |
+| Homepage layout | `params.toml` → `[homepage] layout` (`profile`, `page`, `hero`, `card`, `background`) |
+| Top menu | `menus.pt-br.toml` / `menus.en.toml` |
+| Real domain | `config/_default/hugo.toml` → `baseURL` |
 
-A documentação completa do tema, com todas as opções: https://blowfish.page/docs/
+Full theme documentation, with every option: https://blowfish.page/docs/
